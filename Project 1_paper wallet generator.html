@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<script src="buidl.js"></script>
+<script src="qrcode.js"></script>
+    
+</head>
+<body>
+
+<h1>My Paper wallet Generator</h1> 
+
+<button onClick="return clickButton();">
+Create New Address</button> 
+<br>
+
+<table width = "100%">
+
+<tr>
+    <td><div id="qrcode"></div></td>
+    <td><div id="qrprivate"></div></td>
+</tr>
+<tr>
+    <td><div id="addressDiv"></div></td>
+    <td><div id="privateKeyDiv"></div></td>
+</tr>
+
+</table>
+    
+
+<script>
+
+function clickButton(){
+var newPair = buidl.getNewAddress();
+var address = newPair.p2pkh;
+var privateKey = newPair.pk;
+
+document.getElementById("addressDiv").innerHTML = address;
+document.getElementById("privateKeyDiv").innerHTML = privateKey;
+document.getElementById("qrcode").innerHTML = "";
+document.getElementById("qrprivate").innerHTML = "";
+
+new QRCode(document.getElementById("qrcode"), address);
+new QRCode(document.getElementById("qrprivate"), address);
+
+    
+}
+
+</script>
+</body>
+</html>
